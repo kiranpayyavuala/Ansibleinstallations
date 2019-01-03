@@ -14,13 +14,8 @@
      - name: Install Jenkins
        yum:
          name: jenkins state: present         
-     - name: Start Jenkins service and enable on boot
+     - name: Start Jenkins service and enable
        service:
          name: jenkins
-         state: started
-         enabled: yes
-      - name: Start jenkins service
-        service:
-         name: jenloms
          state: started
          enabled: yes
