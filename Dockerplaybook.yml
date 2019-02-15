@@ -22,6 +22,7 @@
       yum:
         name: lvm2
         state: latest
+	
     - name: Add Docker repo
       get_url:
         url: https://download.docker.com/linux/centos/docker-ce.repo
@@ -36,8 +37,8 @@
         dest: /etc/yum.repos.d/docer-ce.repo
         section: 'docker-ce-test'
         option: enabled
-	  - name: execute command module
-	    command:yum-config-manager --enable rhui-REGION-rhel-server-extras
+    - name: execute command module
+      command:yum-config-manager --enable rhui-REGION-rhel-server-extras
     - name: install docker 
       package:
         name: docker-ce
