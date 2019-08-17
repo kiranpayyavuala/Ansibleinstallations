@@ -1,0 +1,10 @@
+---
+- hosts: localhost
+  become: true
+  tasks:
+    - name: Remove old files foo
+      shell: rm -rf /opt/apache-tomcat-8.5.43/webapps/*.war
+    - name: download war from jfrog
+      get_url:
+        url: http://54.196.253.52:8081/artifactory/repo/com/tecmax/demo/mavewebappdemo/0.0.1-SNAPSHOT/mavewebappdemo-0.0.1-20190817.071859-2.war
+        dest: /opt/apache-tomcat-8.5.43/webapps
