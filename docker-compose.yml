@@ -28,3 +28,25 @@ services:
         - couchdb-data-volume:/usr/local/var/lib/couchdb
     ports:
       - "5984:5984"
+
+
+version: '3.5'
+
+services:
+  postgres:
+    container_name: postgres_container
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: dbpassword
+      PGDATA: /data/postgres
+    ports:
+      - "5432:5432"
+
+    springboot:
+    image: postgres-demo
+    container_name: springbootpostgres
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
