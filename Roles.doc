@@ -1,3 +1,7 @@
+Adding more & more functionality to the playbooks will make it difficult to maintain in a single file
+We can organize playbooks into a directory structure called roles
+This is already possible by ‘include’ directives however Roles are automation around it
+
 Ansible roles is a structured way of grouping tasks, handlers, vars and other properties. They increase reusability. 
 You can easily share roles through Ansible Galaxy. 
 Roles provide a framework for fully independent, or interdependent collections of variables, tasks, files, templates, and modules.
