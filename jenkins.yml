@@ -2,9 +2,13 @@
  - hosts: jenkins
    become: true
    tasks:
-     - name: Install Java 8 using yum
+     - name: install wget
        yum:
-         name: java
+         name: wget
+         state: present
+     - name: Install Java 1.8.0 using yum
+       yum:
+         name: java-1.8.0-openjdk
          state: present
        become: true
      - name: Download Jenkins
@@ -26,6 +30,17 @@
          name: jenkins
          state: started
          enabled: yes
+     - name: sleep for 30 seconds and continue with play
+       wait_for: timeout=30
+       delegate_to: localhost
+     - name: init password jenkin
+       shell: cat /var/lib/jenkins/secrets/initialAdminPassword
+       changed_when: false
+       register: result
+     - name: print init password jenkins
+       debug:
+         var: result.stdout
+  
          
          
   ansible-playbook  -i ./hosts jenkins.yml -u ansible
