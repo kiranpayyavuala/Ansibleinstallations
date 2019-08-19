@@ -1,7 +1,20 @@
----
+ ---
  - hosts: jenkins
    become: true
    tasks:
+     - name: Update the software package repository
+       yum:
+         name: '*'
+         update_cache: yes
+     - name:  Install dependencies 
+       package:
+       name: "{{ item }}"
+       state: latest
+       with_item:
+       - java-1.8.0-openjdk
+       - git
+       - wget
+----------------------------------------------------------------------
      - name: install wget
        yum:
          name: wget
@@ -40,7 +53,6 @@
      - name: print init password jenkins
        debug:
          var: result.stdout
-  
          
          
   ansible-playbook  -i ./hosts jenkins.yml -u ansible
