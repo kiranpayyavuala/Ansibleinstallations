@@ -8,6 +8,22 @@
        register: yum_packages
      - debug:
          var: yum_packages
+=======================================================
+---
+ - hosts: localhost
+   become: true
+   tasks:
+     - name: "Get installed(yum) packages"
+       yum:
+         list=installed
+       register: yum_packages
+     - debug:
+         var: yum_packages
+     - copy:
+         content={{yum_packages}}
+         dest=/home/ansible/kiran.csv
+       run_once: yes
+       delegate_to: localhost
 =======================================================        
 ---
  - hosts: localhost
