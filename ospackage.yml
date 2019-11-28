@@ -24,6 +24,28 @@
          dest=/home/ansible/kiran.csv
        run_once: yes
        delegate_to: localhost
+=======================================================
+generate_csv.j2
+{%set s_no = 1 %}
+S.no,Name,Release,Repo
+{% for each in out.results%}
+{{s_no}},{{each.name}},{{each.release}},{{each.repo}}
+{% set s_no = s_no+1 %}
+{% endfor %}
+========================================================
+---
+ - hosts: localhost
+   become: true
+   tasks:
+     - name: "Get installed(yum) packages"
+       yum:
+         list=installed
+       register: out
+     - name: Display the packages info
+       template:
+         src: generate_csv.j2
+         dest: /home/ansible/output.csv
+       delegate_to: localhost
 =======================================================        
 ---
  - hosts: localhost
