@@ -28,7 +28,7 @@
 generate_csv.j2
 {%set s_no = 1 %}
 S.no,Name,Release,Repo
-{% for each in out.results%}
+{% for each in yum_packages.results%}
 {{s_no}},{{each.name}},{{each.release}},{{each.repo}}
 {% set s_no = s_no+1 %}
 {% endfor %}
@@ -40,7 +40,7 @@ S.no,Name,Release,Repo
      - name: "Get installed(yum) packages"
        yum:
          list=installed
-       register: out
+       register: yum_packages
      - name: Display the packages info
        template:
          src: generate_csv.j2
