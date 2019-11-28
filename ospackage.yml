@@ -41,7 +41,7 @@ S.no,Name,Release,Repo
        yum:
          list=installed
        register: yum_packages
-     - name: Display the packages info
+     - name: Storing the data into csv by using jinja2
        template:
          src: generate_csv.j2
          dest: /home/ansible/output.csv
